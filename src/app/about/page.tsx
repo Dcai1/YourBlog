@@ -1,14 +1,19 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About",
+};
 
 export default function About() {
   return (
     <main className="container py-5 min-h-screen">
-      <div className="row">
-        <div className="col-12 col-md-3 d-flex align-items-start">
-          <h1 className="blog-title my-auto">About</h1>
+      <div className="row g-4 mx-1 mx-md-0">
+        <div className="col-12 col-xl-3 d-flex align-items-start">
+          <h1 className="blog-title my-auto text-md-center">About</h1>
         </div>
 
-        <div className="col-12 col-md-9 box-primary">
+        <div className="col-12 col-xl-9 box-primary">
           <p className="fs-5 mb-3">
             Welcome! This is a blogging website where anyone can create a blog
             post after making an account. <br /> This site is a{" "}

@@ -63,7 +63,7 @@ export default function Create() {
 
   const quillModules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ header: [1, 2, 3, 4, 5, false] }],
       [{ font: [] }],
       [{ size: ["small", false, "large", "huge"] }],
       ["bold", "italic", "underline", "strike"],
@@ -76,11 +76,9 @@ export default function Create() {
   };
 
   return (
-    <main className="container py-5 bg-light min-vh-100">
-      <div className="mx-auto bg-white p-5 rounded-4 shadow-sm">
-        <h1 className="text-center mb-4 fw-bold text-dark">
-          Create a New Post
-        </h1>
+    <main className="container py-5 min-h-screen">
+      <div className="mx-auto box-primary p-5 rounded-4 shadow-sm">
+        <h1 className="text-center mb-4 blog-title">Create a New Post</h1>
 
         {/* Title Input */}
         <div className="mb-3">

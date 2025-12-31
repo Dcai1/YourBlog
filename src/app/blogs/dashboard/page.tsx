@@ -68,51 +68,60 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="container py-5 bg-secondary">
-      <h1 className="mb-4 text-center">Your Dashboard</h1>
+    <main className="container py-5">
+      <h1 className="mb-4 blog-title">Your Dashboard</h1>
 
-      <section>
-        <h2 className="mb-3">Your Blog Posts</h2>
+      <div className="blog-container">
+        <section className="blog-box">
+          <h2 className="mb-3 fw-bold">Your Blog Posts</h2>
 
-        {loading ? (
-          <p className="text-muted text-center">Loading...</p>
-        ) : (
-          <div className="row g-4">
-            {posts.map((post) => (
-              <div key={post.id} className="col-12 col-sm-6 col-md-4">
-                <div className="card h-100 shadow border-2">
-                  <div className="card-body d-flex flex-column">
-                    <div className="d-flex align-items-center">
-                      <h3 className="card-title fw-bold">{post.title}</h3>
-                      <div className="ms-auto">
-                        <Link
-                          href={`/blogs/edit/${post.id}`}
-                          className="text-muted opacity-75 fw-bolder text-secondary"
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(post.id)}
-                          className="btn btn-link text-muted ms-2 p-0 m-0 opacity-75 fw-bolder text-secondary"
-                        >
-                          Delete
-                        </button>
+          {loading ? (
+            <div className="text-center">
+              <p className="fw-bold fs-5 text-primary">Loading!</p>
+              <svg viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+              </svg>
+            </div>
+          ) : (
+            <div className="row g-4">
+              {posts.map((post) => (
+                <div key={post.id} className="col-12 col-sm-6 col-md-4">
+                  <div className="card h-100 shadow border-2 card-blog">
+                    <div className="card-body d-flex flex-column">
+                      <div className="d-flex align-items-center">
+                        <h3 className="card-title fw-bold">{post.title}</h3>
+                        <div className="ms-auto">
+                          <Link
+                            href={`/blogs/edit/${post.id}`}
+                            className="text-muted opacity-75 fw-bolder text-secondary"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(post.id)}
+                            className="btn btn-link text-muted ms-2 p-0 m-0 opacity-75 fw-bolder text-secondary"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </div>
+                      <p className="card-text text-muted grow">
+                        {post.excerpt}
+                      </p>
                     </div>
-                    <p className="card-text text-muted grow">{post.excerpt}</p>
-                  </div>
-                  <div className="card-footer bg-transparent border-0 text-end">
-                    <small className="text-muted">
-                      Last updated{" "}
-                      {new Date(post.updatedAt).toLocaleDateString()}
-                    </small>
+                    <div className="card-footer bg-transparent border-0 text-end">
+                      <small className="text-muted">
+                        Last updated{" "}
+                        {new Date(post.updatedAt).toLocaleDateString()}
+                      </small>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   );
 }

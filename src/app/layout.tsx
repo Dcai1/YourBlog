@@ -16,8 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "placeholder",
+  title: {
+    template: "%s | Your Blog",
+    default: `Your Blog`,
+  },
+  description:
+    "A simple and quick blogging website that allows anybody to create a post.",
+  metadataBase: new URL(`http://localhost:3000`),
 };
 
 export default function RootLayout({

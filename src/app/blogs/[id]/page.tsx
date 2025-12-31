@@ -16,8 +16,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }
 
   return (
-    <main className="container my-5">
-      <div className="card shadow-sm border-0">
+    <main className="container my-5 d-flex align-items-center justify-content-center">
+      <div className="card shadow-sm border-0 blog-box">
         <div className="card-body p-5">
           <h1 className="card-title display-4 fw-bold mb-4 text-dark">
             {post.title}

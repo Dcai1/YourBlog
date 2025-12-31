@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { BlogButton } from "./components/BlogButton";
 import { Hello } from "./components/hello";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
 
 export default function Home() {
   return (

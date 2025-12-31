@@ -88,10 +88,10 @@ export default function Register() {
   };
 
   return (
-    <main className="container mt-5 d-flex justify-content-center align-items-center vh-100">
-      <div className="col-10 col-sm-8 col-md-6 col-lg-5 p-4 rounded shadow bg-secondary">
+    <main className="container mt-5 d-flex justify-content-center align-items-center page-section">
+      <div className="col-10 col-sm-8 col-md-6 col-lg-5 p-4 rounded shadow bg-primary">
         <div className="d-flex flex-column">
-          <h1 className="text-center mb-4"> Register </h1>
+          <h1 className="text-center mb-4 blog-title"> Register </h1>
 
           {/* Message alert */}
           {message && (

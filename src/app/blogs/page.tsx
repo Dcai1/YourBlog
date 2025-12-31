@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "../lib/AuthContext";
 import { useState, useEffect } from "react";
+import { BlogButton } from "../components/BlogButton";
 
 interface BlogPost {
   id: string;
@@ -38,20 +39,23 @@ export default function Blog() {
   }, []);
 
   return (
-    <main className="container min-h-screen py-4">
-      <div className="mb-4 text-center">
+    <main className="container d-flex flex-column page-section py-4">
+      <div className="mb-4 text-center d-flex align-items-center justify-content-center flex-column flex-md-row">
+        <div className="flex-grow-1"></div>
         <h1 className="blog-title">Blogs</h1>
+        {/* Show button to create a post on login */}
+        {user && (
+          <div className="text-center d-flex flex-grow-1 align-content-end justify-content-end">
+            {" "}
+            <BlogButton
+              href="/blogs/create"
+              text="Create Post"
+              size="fs-1"
+              gradient="btn-primary-to-dark"
+            />
+          </div>
+        )}
       </div>
-
-      {/* Show button to create a post on login */}
-      {user && (
-        <div className="mb-4 text-center">
-          {" "}
-          <Link className="btn btn-primary" href="/blogs/create">
-            Create Post
-          </Link>
-        </div>
-      )}
 
       {/* Display blog posts from database */}
       <div className="d-flex align-items-center justify-content-center">
