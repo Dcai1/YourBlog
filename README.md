@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A simple and quick blogging website that gets the job done. Allows anyone to create a blog post. Create, edit, and modify your posts as effortlessly as possible.
 
-## Getting Started
+This is a Minimum Viable Product, and so it will lack many features modern blogs have.
 
-First, run the development server:
+This site features registration, login using authentication and authorization that utilize API routes I created, and a database it reads, writes to, and grabs data from to display the posts you see here.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js
+- REST APIs
+- Prisma
+- React
+- Bootstrap
+- Tailwind
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Site Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Account Login/Registration
+- Blog Posts
+  - Creation
+  - Reading
+  - Updating
+  - Deleting
 
-## Learn More
+## Why I Made This
 
-To learn more about Next.js, take a look at the following resources:
+**To deepen my experience in back-end development.**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Every step in the process, every component you see placed in, even everything down to the smallest amount of detail, was a learning experience for me.
+Even if everything in the site may look a little "bland", I have planted my roots into gaining insight on how many of today's systems are implemented. The only thing left for me from now on is improvement.

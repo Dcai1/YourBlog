@@ -1,0 +1,250 @@
+$primary: #16bac5;
+$secondary: #141414;
+
+@import "bootstrap/scss/bootstrap";
+@import "react-quill-new/dist/quill.snow.css";
+
+:root {
+  --gradient-dark: linear-gradient(105deg, #141414, rgb(33, 33, 33));
+  --background: var(--gradient-dark);
+  --foreground: #ffffff;
+
+  --color-verdigris: #16bac5;
+  --color-highlight: #13dae8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-richblack: #001524;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Calibri, Helvetica;
+  min-height: 100vh;
+
+  overflow-x: hidden;
+}
+
+a {
+  font-weight: 700;
+}
+
+/* Custom Backgrounds */
+
+.bg-dark {
+  background: linear-gradient(90deg, #141414, rgb(33, 33, 33));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-nav {
+  background: linear-gradient(45deg, #16b9c5da 5%, #16bac5, #16b9c5b7 90%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-primary-to-dark {
+  background-image: linear-gradient(15deg, #16bac5 5%, rgb(33, 33, 33));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-warning {
+  background-image: linear-gradient(
+    #141414,
+    #c59f16cc 30%,
+    #ffee00cd,
+    #c59f16cc 80%
+  );
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .bg-warning {
+    background-image: linear-gradient(
+        #141414,
+        #c59f16cc 30%,
+        #ffee00cd,
+        #c59f16cc 80%
+      ),
+      url("/bg/warning.webp");
+  }
+}
+
+.warning-box {
+  background-color: rgba(255, 238, 0, 0.6);
+  padding: 2rem;
+  -webkit-backdrop-filter: blur(0.2em);
+  backdrop-filter: blur(0.2em);
+  border-radius: 1em;
+}
+
+.box-primary {
+  background-color: rgb(22, 186, 197, 0.6);
+  border: 2px solid #16bac5;
+  border-radius: 1em;
+  filter: drop-shadow(3px 3px 5px #16b9c5b7);
+  padding: 2rem;
+}
+
+.blog-box {
+  width: 80vw;
+  min-height: 60vh;
+  background-color: rgb(22, 186, 197, 0.6);
+  border: 2px solid #16bac5;
+  border-radius: 1em;
+  filter: drop-shadow(3px 3px 5px #16b9c5b7);
+  padding: 2rem;
+}
+
+.btn-primary-to-dark {
+  background-image: linear-gradient(180deg, #16b9c5f6, rgba(33, 33, 33, 0.5));
+  background-size: cover;
+  background-position: center;
+
+  background-blend-mode: difference;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.page-section {
+  min-height: 70vh;
+}
+
+/* Text Helpers */
+
+.highlight {
+  color: var(--color-highlight);
+  font-weight: bold;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-w-screen {
+  min-width: 100vw;
+}
+
+.section-10 {
+  min-width: 100vw;
+  min-height: 10vh;
+  padding: 4rem 1rem;
+}
+
+.section-50 {
+  min-width: 100vw;
+  min-height: 50vh;
+  padding: 4rem 1rem;
+}
+
+.blur {
+  -webkit-backdrop-filter: blur(0.2em);
+  backdrop-filter: blur(0.2em);
+}
+
+/* Bootstrap Component Overrides */
+
+.btn-outline-primary {
+  --bs-btn-border-color: #13dae8;
+  --bs-btn-color: #13dae8;
+
+  --bs-btn-hover-color: #60f4ff;
+  --bs-btn-hover-bg: #60f4ffa3;
+  --bs-btn-hover-border-color: #60f4ff;
+}
+
+.bg-info {
+  --bs-bg-opacity: 0.6;
+}
+
+/* Component Styling */
+
+.card-blog {
+  --bs-card-bg: transparent;
+  --bs-card-box-shadow: transparent;
+  --bs-card-border-color: #16bac5;
+  background-image: linear-gradient(45deg, #16bac5 10%, #00eeff, #16bac5 90%);
+  box-shadow: 5px 5px 10px 5px #16bac5;
+}
+
+.blog-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: calc(5rem + 1.5vw);
+  background-image: linear-gradient(45deg, #bafaff 35%, #00ffff, #adf8ff 60%);
+  background-size: contain;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: calc(3.5% + 1.5vw);
+}
+
+.blog-warning {
+  text-align: center;
+  font-weight: bold;
+  background-image: linear-gradient(135deg, #141414 5%, #ffb300);
+  background-size: contain;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Loader */
+
+/* From Uiverse.io by barisdogansutcu */
+svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: #16bac5;
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+/* Phone padding */
+@media (min-width: 768px) {
+  .section {
+    padding: 6rem 1rem;
+  }
+}
