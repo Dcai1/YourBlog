@@ -1,17 +1,22 @@
 import Link from "next/link";
 import { BlogButton } from "./components/BlogButton";
-import { Hello } from "./components/hello";
 import { Metadata } from "next";
+
+// TODO:
+// move hello component into navbar - done
+// Make blogs a server page to improve SEO - done
+// Make an icon for the website
+// Make the navbar friendly for mobile
 
 export const metadata: Metadata = {
   title: "Home",
+  description:
+    "YourBlog is a free blogging platform where anybody is capable of making a post. All you need is an account to get started.",
 };
 
 export default function Home() {
   return (
     <main className="container d-flex flex-column align-items-center justify-content-center">
-      <Hello />
-
       <div className="p-5 min-w-screen text-center bg-secondary">
         <h1>Welcome to Your Blog!</h1>
       </div>
@@ -46,7 +51,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container d-flex flex-column min-w-height p-5 bg-info rounded m-3 mb-5">
+      <div className="container d-flex flex-column min-w-height p-5 bg-info rounded m-3">
         <div className="align-items-center justify-content-center">
           <p className="fs-5">
             This site is a{" "}

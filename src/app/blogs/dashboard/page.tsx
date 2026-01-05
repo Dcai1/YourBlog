@@ -73,7 +73,7 @@ export default function Dashboard() {
 
       <div className="blog-container">
         <section className="blog-box">
-          <h2 className="mb-3 fw-bold">Your Blog Posts</h2>
+          <h2 className="mb-3 fw-bold text-secondary">Your Blog Posts</h2>
 
           {loading ? (
             <div className="text-center">

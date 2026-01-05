@@ -3,7 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../lib/AuthContext";
 import { useRouter } from "next/navigation";
+import { Hello } from "./hello";
 import { BlogButton } from "./BlogButton";
+import Image from "next/image";
 
 export const Navbar = () => {
   const pathName = usePathname();
@@ -24,11 +26,13 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-md shadow bg-nav">
       <div className="container-fluid d-flex justify-content-between align-items-center">
         {/* Left: Logo */}
-        <Link
-          className="navbar-brand mb-0 h1 text-black fs-4 fw-bolder"
-          href="/"
-        >
-          YourBlog
+        <Link className="navbar-brand mb-0" href="/">
+          <Image
+            src={`/logotext.svg`}
+            alt="YourBlog"
+            width={85}
+            height={30}
+          ></Image>
         </Link>
 
         {/* Center: Nav links */}
@@ -81,7 +85,8 @@ export const Navbar = () => {
 
         {/* Right: Auth buttons */}
 
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-3">
+          <Hello />
           {user ? (
             <>
               <button
