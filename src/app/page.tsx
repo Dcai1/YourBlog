@@ -29,12 +29,21 @@ export default function Home() {
           possible.
         </p>
 
-        <BlogButton
-          href="/blogs"
-          text="Explore Articles"
-          size="fs-1"
-          gradient="btn-primary-to-dark"
-        />
+        <div className="d-flex flex-column align-items-center justify-content-center my-auto gap-4">
+          <BlogButton
+            href="/blogs"
+            text="Explore Articles"
+            size="fs-1"
+            gradient="btn-primary-to-dark"
+          />
+
+          <BlogButton
+            href="/register"
+            text="Or make an account!"
+            size="fs-2"
+            gradient="btn-primary-to-dark"
+          />
+        </div>
 
         <div>
           <p className="fs-2 text-primary"> Scroll Down </p>

@@ -2,12 +2,13 @@ import { prisma } from "@/app/lib/prisma_client";
 import { notFound } from "next/navigation";
 
 interface BlogPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
+  const idParam = await params;
   const post = await prisma.blogPost.findUnique({
-    where: { id: params.id },
+    where: { id: idParam.id },
     include: { author: true },
   });
 
