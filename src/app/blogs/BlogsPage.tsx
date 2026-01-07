@@ -55,7 +55,7 @@ export default function Blog() {
 
       {/* Display blog posts from database */}
       <div className="d-flex align-items-center justify-content-center">
-        <section className="row g-4 blog-box">
+        <section className="d-flex my-auto row g-4 blog-box">
           {loading && (
             <div className="text-center">
               <p className="fw-bold fs-5 text-primary">Loading!</p>
