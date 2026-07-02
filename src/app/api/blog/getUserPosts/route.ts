@@ -4,25 +4,18 @@ import { GetUser } from "@/app/lib/auth";
 
 export async function GET() {
   try {
-    // Extract the user ID from the query string
-
-    // TODO: fix security vulnerability
-    /**
-    const { searchParams } = new URL(req.url);
-    console.log(searchParams);
-    const id = searchParams.get("id");
-    */
-
+    // Extract the user ID from the user and validate
     const user = await GetUser();
     const id = user?.id;
 
+    // ID Validation
     if (!id) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // Fetch all posts by this author
+    // Fetch all posts by the author
     const posts = await prisma.blogPost.findMany({
-      where: { authorId: id },
+      where: { authorId: user.id },
       select: {
         id: true,
         title: true,

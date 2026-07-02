@@ -5,17 +5,19 @@ import { GetUser } from "@/app/lib/auth";
 //** Current Issues
 // Empty Drafts should not be saved * Complete
 // Same existing Drafts should not be saved
-// Issue: Unsaved drafts have no id, letting existing draft be saved as if they were unique
+// Issue: Unsaved drafts have no postId, letting existing draft be saved as if they were unique
 // Optional: Implement auto-saving if session runs out while editing */
 
 export async function POST(req: NextRequest) {
-  const user = await GetUser();
   if (req.method !== "POST") {
     return NextResponse.json(
       { message: "Method not allowed" },
-      { status: 405 }
+      { status: 405 },
     );
   }
+
+  // acquire the user's session
+  const user = await GetUser();
 
   function isEmptyRichText(html: string): boolean {
     // Remove all HTML tags and decode HTML entities
@@ -27,27 +29,42 @@ export async function POST(req: NextRequest) {
   }
 
   // Require logged in user
+
+  // won't work if the user isn't logged in
   if (!user) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { id, title, content, excerpt } = await req.json();
-  console.warn({ id });
+  // receive post contents postId, title, content and excerpt from request
+  // support both `id` and `postId` in the payload for backward-compatibility
+  const payload = await req.json();
+  const {
+    id: payloadId,
+    postId: payloadPostId,
+    title,
+    content,
+    excerpt,
+  } = payload;
+  const postId = payloadId ?? payloadPostId ?? null;
 
   // Draft must not be empty
+  // validate for empty fields
   if (!title.trim() || isEmptyRichText(content) || !excerpt.trim()) {
     console.log("Title: ", title.trim());
     console.log("Excerpt: ", excerpt.trim());
     console.log(isEmptyRichText(content));
     return NextResponse.json(
       { message: "Please fill in the required fields before saving." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   // Draft must not be a duplicate
-  if (id) {
-    const existing = await prisma.blogPost.findUnique({ where: { id } });
+  // validate for duplicate posts using postId
+  if (postId) {
+    const existing = await prisma.blogPost.findUnique({
+      where: { id: postId },
+    });
     if (
       existing &&
       existing.title === title &&
@@ -55,16 +72,20 @@ export async function POST(req: NextRequest) {
       existing.excerpt === excerpt
     ) {
       return NextResponse.json(
-        { message: "No changes detected — draft not saved." },
-        { status: 200 }
+        { message: "No changes detected. Make a change and try again." },
+        { status: 200 },
       );
+    }
+    // Ensure the current session user owns the post before allowing updates
+    if (existing && existing.authorId !== user.id) {
+      return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
   }
 
-  // Add or edit
+  // operations to add or update the post using prisma
   try {
     let post;
-    if (!id) {
+    if (!postId) {
       post = await prisma.blogPost.create({
         data: {
           title,
@@ -79,7 +100,7 @@ export async function POST(req: NextRequest) {
       });
     } else {
       post = await prisma.blogPost.update({
-        where: { id },
+        where: { id: postId },
         data: {
           title,
           content,
@@ -90,19 +111,19 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json(
         { message: "Draft updated successfully. ", post: post },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
     return NextResponse.json(
       { message: "Draft saved successfully. ", post: post },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     console.error("Error saving draft: ", err);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
