@@ -1,18 +1,23 @@
 import { prisma } from "@/app/lib/prisma_client";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { GetUser } from "@/app/lib/auth";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     // Extract the user ID from the query string
+
+    // TODO: fix security vulnerability
+    /**
     const { searchParams } = new URL(req.url);
     console.log(searchParams);
     const id = searchParams.get("id");
+    */
+
+    const user = await GetUser();
+    const id = user?.id;
 
     if (!id) {
-      return NextResponse.json(
-        { message: "User ID is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     // Fetch all posts by this author
@@ -34,7 +39,7 @@ export async function GET(req: NextRequest) {
     console.error(error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
