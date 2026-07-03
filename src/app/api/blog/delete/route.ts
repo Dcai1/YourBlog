@@ -7,7 +7,7 @@ export async function DELETE(req: NextRequest) {
   if (req.method !== "DELETE") {
     return NextResponse.json(
       { message: "Method not allowed" },
-      { status: 405 }
+      { status: 405 },
     );
   }
   const user = await GetUser();
@@ -20,7 +20,7 @@ export async function DELETE(req: NextRequest) {
   if (!id) {
     return NextResponse.json(
       { message: "Invalid/Missing post ID" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -45,13 +45,13 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Post deleted successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
       { message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

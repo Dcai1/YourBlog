@@ -6,15 +6,21 @@ export async function PATCH(req: NextRequest) {
   if (req.method !== "PATCH") {
     return NextResponse.json(
       { message: "Method not allowed" },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
   const { id, title, content, excerpt, published } = await req.json();
 
+  // check if user is logged in (any user logged in)
   const user = await GetUser();
   if (!user) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  // validate if session user is the author of this post
+  if (id !== user.id) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
 
   // Validate and extract post ID
@@ -26,7 +32,7 @@ export async function PATCH(req: NextRequest) {
   if (!title && !content && !excerpt && typeof published !== "boolean") {
     return NextResponse.json(
       { message: "No fields to update" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -55,14 +61,14 @@ export async function PATCH(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Post updated successfully: ", post: updatedPost },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error(error);
 
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -65,6 +65,18 @@ export async function POST(req: NextRequest) {
     const existing = await prisma.blogPost.findUnique({
       where: { id: postId },
     });
+
+    // Handle cases where the post doesn't exist
+    if (!existing) {
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    }
+
+    // Ensure the current session user owns the post before allowing updates
+    if (existing && existing.authorId !== user.id) {
+      return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+    }
+
+    // after both validation checks, compare title content and excerpt for *any* changes
     if (
       existing &&
       existing.title === title &&
@@ -76,15 +88,13 @@ export async function POST(req: NextRequest) {
         { status: 200 },
       );
     }
-    // Ensure the current session user owns the post before allowing updates
-    if (existing && existing.authorId !== user.id) {
-      return NextResponse.json({ message: "Forbidden" }, { status: 403 });
-    }
   }
 
   // operations to add or update the post using prisma
   try {
     let post;
+
+    // create post if postId is null
     if (!postId) {
       post = await prisma.blogPost.create({
         data: {
@@ -98,6 +108,8 @@ export async function POST(req: NextRequest) {
           },
         },
       });
+
+      // update post if postId is not null
     } else {
       post = await prisma.blogPost.update({
         where: { id: postId },
