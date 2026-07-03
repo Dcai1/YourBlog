@@ -11,7 +11,6 @@ interface BlogPageProps {
 
 export default async function BlogPage({ params }: BlogPageProps) {
   const { id } = await params;
-  const user = await GetUser();
 
   // grab blog post by id
   const post = await prisma.blogPost.findUnique({
@@ -26,6 +25,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   // redirect to a 404 if the post is not published, or the user accessing this is not the author
   if (!post.published) {
+    const user = await GetUser();
     if (!user || user.id !== post.authorId) {
       notFound();
     }
