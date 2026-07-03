@@ -10,6 +10,7 @@ export async function PATCH(req: NextRequest) {
     );
   }
 
+  // extract post ID, title, content, excerpt and published
   const { id, title, content, excerpt, published } = await req.json();
 
   // check if user is logged in (any user logged in)
@@ -18,36 +19,41 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  // validate if session user is the author of this post
-  if (id !== user.id) {
-    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
-  }
-
-  // Validate and extract post ID
+  // validate if provided post ID exists
   if (!id) {
     return NextResponse.json({ message: "Missing post ID" }, { status: 400 });
   }
 
-  // Check for empty edits
-  if (!title && !content && !excerpt && typeof published !== "boolean") {
-    return NextResponse.json(
-      { message: "No fields to update" },
-      { status: 400 },
-    );
-  }
-
+  // post ID validated, check if post exists using the provided post ID
   try {
     const post = await prisma.blogPost.findUnique({
       where: { id },
     });
 
+    // return a message if post does not exist
     if (!post) {
       return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
+
+    // validate if session user is the author of this post
     if (post.authorId !== user.id) {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
 
+    // Check for empty edits
+    if (
+      title === undefined &&
+      content === undefined &&
+      excerpt === undefined &&
+      published === undefined
+    ) {
+      return NextResponse.json(
+        { message: "No fields to update. Make a change and try again." },
+        { status: 400 },
+      );
+    }
+
+    // update post using prisma
     const updatedPost = await prisma.blogPost.update({
       where: { id },
       data: {
