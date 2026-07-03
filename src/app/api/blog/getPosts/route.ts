@@ -5,10 +5,11 @@ export async function GET(req: NextRequest) {
   if (req.method !== "GET") {
     return NextResponse.json(
       { message: "Method not allowed" },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
+  // Fetch all posts that are published
   try {
     const posts = await prisma.blogPost.findMany({
       where: { published: true },
@@ -24,8 +25,8 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
+      { message: "Internal Server Error. Please try again later." },
+      { status: 500 },
     );
   }
 }
