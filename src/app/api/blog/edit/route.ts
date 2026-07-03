@@ -56,11 +56,14 @@ export async function PATCH(req: NextRequest) {
     // update post using prisma
     const updatedPost = await prisma.blogPost.update({
       where: { id },
+
+      // update only the areas that have been edited, leaving the others unchanged
+      // logic:
       data: {
-        title,
-        content,
-        excerpt,
-        published,
+        ...(title !== undefined && { title }),
+        ...(content !== undefined && { content }),
+        ...(excerpt !== undefined && { excerpt }),
+        ...(published !== undefined && { published }),
         updatedAt: new Date(),
       },
     });
