@@ -1,19 +1,34 @@
 import { prisma } from "@/app/lib/prisma_client";
 import { notFound } from "next/navigation";
+import { GetUser } from "@/app/lib/auth";
 
+// Renders the post content on this page by ID and using dangerouslySetInnerHTML
+
+// publish added to the page props
 interface BlogPageProps {
   params: Promise<{ id: string }>;
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const idParam = await params;
+  const { id } = await params;
+  const user = await GetUser();
+
+  // grab blog post by id
   const post = await prisma.blogPost.findUnique({
-    where: { id: idParam.id },
+    where: { id },
     include: { author: true },
   });
 
+  // redirect to a 404 if the post doesn’t exist
   if (!post) {
-    notFound(); // built-in 404 if the post doesn’t exist
+    notFound();
+  }
+
+  // redirect to a 404 if the post is not published, or the user accessing this is not the author
+  if (!post.published) {
+    if (!user || user.id !== post.authorId) {
+      notFound();
+    }
   }
 
   return (
@@ -40,6 +55,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
           <hr className="my-4" />
 
+          {/* render post contents using dangerouslySetInnerHTML (sanitized) */}
           <div
             className="card-text fs-5 lh-lg"
             dangerouslySetInnerHTML={{ __html: post.content }}
