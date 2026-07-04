@@ -40,7 +40,7 @@ export default function Create() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/api/blog/save-draft`, {
+      const res = await fetch(`/api/blog/save-post`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content, excerpt, published }),
