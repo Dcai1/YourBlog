@@ -7,17 +7,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 
+  // grab email, password, first and last name from request
   const { email, password, firstName, lastName } = await req.json();
 
+  // email is validated through a regex on frontend
   // Validate Unique Email
   const existingEmail = await prisma.user.findUnique({ where: { email } });
   if (existingEmail) {
     return NextResponse.json(
-      { error: "Email already in use" },
-      { status: 400 }
+      { error: "Email already exists" },
+      { status: 400 },
     );
   }
 
+  // password security is tested through a regex on the frontend
   // Hash password using 12 salt rounds
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -37,7 +40,7 @@ export async function POST(req: NextRequest) {
   if (newUser) {
     return NextResponse.json(
       { message: "Account created successfully" },
-      { status: 201 }
+      { status: 201 },
     );
   }
 }

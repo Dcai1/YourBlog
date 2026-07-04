@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json(
       { message: "Method not allowed" },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   if (!email || !password) {
     return NextResponse.json(
       { error: "Please fill out the required fields before submitting." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -28,18 +28,20 @@ export async function POST(req: NextRequest) {
     select: { id: true, email: true, password: true },
   });
 
+  // validate email
   if (!existingUser) {
     return NextResponse.json(
-      { error: "This email does not exist." },
-      { status: 400 }
+      { error: "Invalid email or password." },
+      { status: 400 },
     );
   }
 
+  // validate password by comparing it to the hashed one in the database
   const validPassword = await bcrypt.compare(password, existingUser.password);
   if (!validPassword) {
     return NextResponse.json(
-      { error: "Password does not match." },
-      { status: 400 }
+      { error: "Invalid email or password." },
+      { status: 400 },
     );
   }
 
@@ -59,7 +61,7 @@ export async function POST(req: NextRequest) {
   // Notify frontend with a response and insert the session as browser cookie
   const response = NextResponse.json(
     { message: "Login successful" },
-    { status: 200 }
+    { status: 200 },
   );
 
   response.cookies.set("sessionId", sessionId, {
