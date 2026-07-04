@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  // receive post contents postId, title, content and excerpt from request
+  // receive post contents postId, title, content, excerpt and published from request
   // support both `id` and `postId` in the payload for backward-compatibility
   const payload = await req.json();
   const {
@@ -44,6 +44,8 @@ export async function POST(req: NextRequest) {
     title,
     content,
     excerpt,
+    // Published toggle
+    published,
   } = payload;
   const postId = payloadId ?? payloadPostId ?? null;
 
@@ -101,7 +103,7 @@ export async function POST(req: NextRequest) {
           title,
           content,
           excerpt,
-          published: false,
+          published: published ?? false,
           createdAt: new Date(),
           author: {
             connect: { id: user.id },
@@ -117,7 +119,7 @@ export async function POST(req: NextRequest) {
           title,
           content,
           excerpt,
-          published: false,
+          published: published ?? false,
           updatedAt: new Date(),
         },
       });

@@ -15,6 +15,9 @@ export default function Create() {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
 
+  // Published toggle
+  const [published, setPublished] = useState<boolean>(false);
+
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -40,7 +43,7 @@ export default function Create() {
       const res = await fetch(`/api/blog/save-draft`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, content, excerpt }),
+        body: JSON.stringify({ title, content, excerpt, published }),
       });
       const data = await res.json();
 
@@ -117,6 +120,17 @@ export default function Create() {
           </div>
         </div>
 
+        {/* Publish Button */}
+        <label className="switch">
+          <input
+            placeholder="Will this post show publicly?"
+            type="checkbox"
+            checked={published}
+            onChange={(e) => setPublished(e.target.checked)}
+          />
+          <span className="slider"></span>
+        </label>
+
         {/* Submit */}
         <div className="text-center">
           {/* Message alert */}
@@ -129,6 +143,7 @@ export default function Create() {
             </div>
           )}
 
+          {/* Save Draft Button */}
           <button
             type="submit"
             onClick={handleSubmit}
