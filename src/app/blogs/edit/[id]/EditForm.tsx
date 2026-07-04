@@ -164,7 +164,7 @@ export default function EditForm({ post }: { post: BlogParams }) {
             onClick={handleSubmit}
             className="btn btn-primary px-5 py-2 fs-5"
           >
-            Save Draft
+            Save Post
           </button>
           {loading && (
             <p className="text-muted text-center fw-bolder">Processing...</p>

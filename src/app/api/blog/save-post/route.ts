@@ -83,7 +83,8 @@ export async function POST(req: NextRequest) {
       existing &&
       existing.title === title &&
       existing.content === content &&
-      existing.excerpt === excerpt
+      existing.excerpt === excerpt &&
+      existing.published === (published ?? false)
     ) {
       return NextResponse.json(
         { message: "No changes detected. Make a change and try again." },
