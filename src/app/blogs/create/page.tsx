@@ -121,16 +121,24 @@ export default function Create() {
         </div>
 
         {/* Publish Button */}
-        <label className="switch">
-          <input
-            placeholder="Will this post show publicly?"
-            type="checkbox"
-            checked={published}
-            onChange={(e) => setPublished(e.target.checked)}
-          />
-          <span className="slider"></span>
-        </label>
-
+        <div className="mb-3">
+          <label className="form-label fw-semibold">
+            Publish Post Publicly
+          </label>
+          <label className="switch">
+            <input
+              placeholder="Will this post show publicly?"
+              type="checkbox"
+              checked={published}
+              onChange={(e) => setPublished(e.target.checked)}
+            />
+            <span className="slider"></span>
+          </label>
+          <label className="form-label fw-semibold">
+            If enabled, this post will appear on the public blog. If disabled,
+            it will stay as a draft.
+          </label>
+        </div>
         {/* Submit */}
         <div className="text-center">
           {/* Message alert */}
