@@ -149,7 +149,7 @@ export default function Create() {
             onClick={handleSubmit}
             className="btn btn-primary px-5 py-2 fs-5"
           >
-            Save Post
+            {published ? "Publish Post" : "Save Draft"}
           </button>
           {loading && (
             <p className="text-muted text-center fw-bolder">Processing...</p>
