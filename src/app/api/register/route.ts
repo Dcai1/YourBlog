@@ -6,11 +6,21 @@ export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
   // grab email, password, first and last name from request
   const { email, password, firstName, lastName } = await req.json();
 
-  // email is validated through a regex on frontend
+  // TODO: test email with regex
+  // here
+
+  // TODO: test password with regex
+  // here
+
+  // TODO: validate first and last names are type strings and not empty
+  // here
+
   // Validate Unique Email
   const existingEmail = await prisma.user.findUnique({ where: { email } });
   if (existingEmail) {
