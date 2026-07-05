@@ -41,6 +41,10 @@ export default function Blog() {
     <main className="container min-h-screen py-4">
       <div className="mb-4 text-center">
         <h1 className="blog-title">Blogs</h1>
+        <p className="text-muted mb-0">
+          Browse published posts from the blog. Unpublished posts remain visible
+          only to their authors.
+        </p>
       </div>
 
       {/* Show button to create a post on login */}
@@ -48,7 +52,7 @@ export default function Blog() {
         <div className="mb-4 text-center">
           {" "}
           <Link className="btn btn-primary" href="/blogs/create">
-            Create Post
+            Create a Post
           </Link>
         </div>
       )}

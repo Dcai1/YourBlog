@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="container d-flex flex-column align-items-center justify-content-center">
       <div className="p-5 min-w-screen text-center bg-secondary">
-        <h1>Welcome to Your Blog!</h1>
+        <h1>Welcome to YourBlog!</h1>
       </div>
 
       <section className="page-section d-flex flex-column flex-grow-1 gap-3 align-items-center px-3 my-3 gap-3 justify-content-between">

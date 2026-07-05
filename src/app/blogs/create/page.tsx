@@ -15,6 +15,9 @@ export default function Create() {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
 
+  // Published toggle
+  const [published, setPublished] = useState<boolean>(false);
+
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,10 +40,10 @@ export default function Create() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/api/blog/save-draft`, {
+      const res = await fetch(`/api/blog/save-post`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, content, excerpt }),
+        body: JSON.stringify({ title, content, excerpt, published }),
       });
       const data = await res.json();
 
@@ -117,6 +120,25 @@ export default function Create() {
           </div>
         </div>
 
+        {/* Publish Button */}
+        <div className="mb-3">
+          <label className="form-label fw-semibold">
+            Publish Post Publicly
+          </label>
+          <label className="switch">
+            <input
+              placeholder="Will this post show publicly?"
+              type="checkbox"
+              checked={published}
+              onChange={(e) => setPublished(e.target.checked)}
+            />
+            <span className="slider"></span>
+          </label>
+          <label className="form-label fw-semibold">
+            If enabled, this post will appear on the public blog. If disabled,
+            it will stay as a draft.
+          </label>
+        </div>
         {/* Submit */}
         <div className="text-center">
           {/* Message alert */}
@@ -129,12 +151,13 @@ export default function Create() {
             </div>
           )}
 
+          {/* Save Post Button */}
           <button
             type="submit"
             onClick={handleSubmit}
             className="btn btn-primary px-5 py-2 fs-5"
           >
-            Save Draft
+            {published ? "Publish Post" : "Save Draft"}
           </button>
           {loading && (
             <p className="text-muted text-center fw-bolder">Processing...</p>
