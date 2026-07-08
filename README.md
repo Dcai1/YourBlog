@@ -4,15 +4,16 @@ Full-stack blogging application built with Next.js 15 (App Router), React 19, Ty
 
 ## Tech Stack
 
-| Layer     | Technology                       |
-| --------- | -------------------------------- |
-| Framework | Next.js 15 (App Router)          |
-| Frontend  | React 19, TypeScript             |
-| Styling   | Bootstrap 5, Sass (SCSS)         |
-| Rich Text | Quill (react-quill-new)          |
-| Database  | PostgreSQL                       |
-| ORM       | Prisma                           |
-| Auth      | bcryptjs + custom session tokens |
+| Layer        | Technology                       |
+| ------------ | -------------------------------- |
+| Framework    | Next.js 15 (App Router)          |
+| Frontend     | React 19, TypeScript             |
+| Styling      | Bootstrap 5, Sass (SCSS)         |
+| Rich Text    | Quill (react-quill-new)          |
+| Sanitization | Sanitize-html                    |
+| Database     | PostgreSQL                       |
+| ORM          | Prisma                           |
+| Auth         | bcryptjs + custom session tokens |
 
 ## Features
 
@@ -26,6 +27,7 @@ Full-stack blogging application built with Next.js 15 (App Router), React 19, Ty
 ## Security
 
 - Server-side session auth with httpOnly, sameSite cookies
+- Post sanitization using the sanitize-html library
 - bcrypt password hashing (12 rounds)
 - Generic login errors to prevent email enumeration
 - Session expiration and auto-cleanup
@@ -36,4 +38,4 @@ Full-stack blogging application built with Next.js 15 (App Router), React 19, Ty
 
 ## Project Status
 
-**(Almost)** Production-ready MVP. Still requires a couple of tweaks and a modernized front-end layout before I can truly consider it ready for production. Core security and ownership semantics are hardened. Ongoing improvements including XSS sanitization for rich content, enhanced server-side validation, dynamic metadata, and SEO optimization.
+**(Almost)** Production-ready MVP. Still requires a couple of tweaks and a modernized front-end layout before I can truly consider it ready for production. Core security and ownership semantics are hardened. Ongoing improvements including XSS sanitization for rich content, enhanced server-side validation, dynamic metadata, and SEO optimization are in the works!
