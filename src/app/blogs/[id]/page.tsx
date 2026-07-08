@@ -1,6 +1,16 @@
 import { prisma } from "@/app/lib/prisma_client";
 import { notFound } from "next/navigation";
 import { GetUser } from "@/app/lib/auth";
+// @ts-expect-error - sanitize-html has no bundled types in this project
+import sanitizeHtml from "sanitize-html";
+
+interface SanitizeOptions {
+  allowedTags: string[];
+  allowedAttributes: {
+    [key: string]: string[];
+  };
+  allowedSchemes: string[];
+}
 
 // Renders the post content on this page by ID and using dangerouslySetInnerHTML
 
@@ -31,6 +41,18 @@ export default async function BlogPage({ params }: BlogPageProps) {
     }
   }
 
+  // sanitize content one more time for safety measures
+  const sanitizeOptions = {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ["src", "alt", "title"],
+    },
+    allowedSchemes: ["http", "https", "data"],
+  } as SanitizeOptions;
+
+  const safeHtml = sanitizeHtml(post.content ?? "", sanitizeOptions);
+
   return (
     <main className="container my-5 d-flex align-items-center justify-content-center">
       <div className="card shadow-sm border-0 blog-box">
@@ -58,7 +80,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {/* render post contents using dangerouslySetInnerHTML (sanitized) */}
           <div
             className="card-text fs-5 lh-lg"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: safeHtml }}
           />
         </div>
       </div>

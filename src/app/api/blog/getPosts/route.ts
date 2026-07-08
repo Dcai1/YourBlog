@@ -1,5 +1,15 @@
 import { prisma } from "@/app/lib/prisma_client";
 import { NextRequest, NextResponse } from "next/server";
+// @ts-expect-error - sanitize-html has no bundled types in this project
+import sanitizeHtml from "sanitize-html";
+
+interface SanitizeOptions {
+  allowedTags: string[];
+  allowedAttributes: {
+    [key: string]: string[];
+  };
+  allowedSchemes: string[];
+}
 
 export async function GET(req: NextRequest) {
   if (req.method !== "GET") {
@@ -21,7 +31,22 @@ export async function GET(req: NextRequest) {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json({ posts }, { status: 200 });
+    // post sanitization using the sanitize-html package
+    const sanitizeOptions = {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ["src", "alt", "title"],
+      },
+      allowedSchemes: ["http", "https", "data"],
+    } as SanitizeOptions;
+
+    const safePosts = posts.map((p) => ({
+      ...p,
+      content: sanitizeHtml(p.content ?? "", sanitizeOptions),
+    }));
+
+    return NextResponse.json({ posts: safePosts }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

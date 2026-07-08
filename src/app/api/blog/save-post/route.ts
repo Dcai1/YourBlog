@@ -1,6 +1,16 @@
 import { prisma } from "@/app/lib/prisma_client";
 import { NextRequest, NextResponse } from "next/server";
 import { GetUser } from "@/app/lib/auth";
+// @ts-expect-error - sanitize-html has no bundled types in this project
+import sanitizeHtml from "sanitize-html";
+
+interface SanitizeOptions {
+  allowedTags: string[];
+  allowedAttributes: {
+    [key: string]: string[];
+  };
+  allowedSchemes: string[];
+}
 
 //** Current Issues
 // Empty Drafts should not be saved * Complete
@@ -49,12 +59,26 @@ export async function POST(req: NextRequest) {
   } = payload;
   const postId = payloadId ?? payloadPostId ?? null;
 
+  // Sanitize rich HTML content to protect against XSS before any validation or storage.
+  const sanitizeOptions = {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ["src", "alt", "title"],
+    },
+    allowedSchemes: ["http", "https", "data"],
+  } as SanitizeOptions;
+
+  const sanitizedContent = content
+    ? sanitizeHtml(content, sanitizeOptions)
+    : "";
+
   // Draft must not be empty
-  // validate for empty fields
-  if (!title.trim() || isEmptyRichText(content) || !excerpt.trim()) {
+  // validate for empty fields (use sanitized content for emptiness check)
+  if (!title.trim() || isEmptyRichText(sanitizedContent) || !excerpt.trim()) {
     console.log("Title: ", title.trim());
     console.log("Excerpt: ", excerpt.trim());
-    console.log(isEmptyRichText(content));
+    console.log(isEmptyRichText(sanitizedContent));
     return NextResponse.json(
       { message: "Please fill in the required fields before saving." },
       { status: 400 },
@@ -82,7 +106,8 @@ export async function POST(req: NextRequest) {
     if (
       existing &&
       existing.title === title &&
-      existing.content === content &&
+      sanitizeHtml(existing.content ?? "", sanitizeOptions) ===
+        sanitizedContent &&
       existing.excerpt === excerpt &&
       existing.published === (published ?? false)
     ) {
@@ -102,7 +127,7 @@ export async function POST(req: NextRequest) {
       post = await prisma.blogPost.create({
         data: {
           title,
-          content,
+          content: sanitizedContent,
           excerpt,
           published: published ?? false,
           createdAt: new Date(),
@@ -118,7 +143,7 @@ export async function POST(req: NextRequest) {
         where: { id: postId },
         data: {
           title,
-          content,
+          content: sanitizedContent,
           excerpt,
           published: published ?? false,
           updatedAt: new Date(),
