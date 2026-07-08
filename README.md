@@ -1,30 +1,41 @@
-A simple and quick blogging website that gets the job done. Allows anyone to create a blog post. Create, edit, and modify your posts as effortlessly as possible.
+# Blog Platform
 
-This is a Minimum Viable Product, made for the purpose of expertise, and so it lacks a couple features that modern blogs have.
-
-This site features registration, login using authentication and authorization that utilize API routes I created, and a database it reads, writes to, and grabs data from to display the posts you see here.
+Full-stack blogging application built with Next.js 15 (App Router), React 19, TypeScript, PostgreSQL, and Prisma ORM. Features account creation, session-based authentication, rich-text content creation, and a draft/publish workflow.
 
 ## Tech Stack
 
-- Next.js
-- REST APIs
-- Prisma
-- React
-- Bootstrap
-- Custom CSS (Sass)
+| Layer        | Technology                       |
+| ------------ | -------------------------------- |
+| Framework    | Next.js 15 (App Router)          |
+| Frontend     | React 19, TypeScript             |
+| Styling      | Bootstrap 5, Sass (SCSS)         |
+| Rich Text    | Quill (react-quill-new)          |
+| Sanitization | Sanitize-html                    |
+| Database     | PostgreSQL                       |
+| ORM          | Prisma                           |
+| Auth         | bcryptjs + custom session tokens |
 
-## Site Features
+## Features
 
-- Account Login/Registration
-- Blog Posts
-  - Creation
-  - Reading
-  - Updating
-  - Deletion
+- **User accounts** — Registration, login/logout, session-based authentication
+- **Blog CRUD** — Create, read, update, and delete blog posts with a rich text editor
+- **Draft/publish workflow** — Toggle published status; drafts are private to their author
+- **Public blog listing** — Only published posts are visible to visitors
+- **Dashboard** — Manage your own posts from a centralized view
+- **Responsive UI** — Bootstrap 5 with custom Sass styling
 
-## Why I Made This
+## Security
 
-**To deepen my experience in back-end development.**
+- Server-side session auth with httpOnly, sameSite cookies
+- Post sanitization using the sanitize-html library
+- bcrypt password hashing (12 rounds)
+- Generic login errors to prevent email enumeration
+- Session expiration and auto-cleanup
+- Author ownership enforcement on all write/delete API routes (403 for unauthorized requests)
+- Draft privacy — unpublished posts return 404 for non-authors
+- Server-side input validation and duplicate submission detection
+- Session identity derived from server, not from client-supplied parameters
 
-Every step in the process, every component you see placed in, even everything down to the smallest amount of detail, was a learning experience for me.
-Even if everything in the site may look a little "bland", I have planted my roots into gaining insight on how many of todays systems are implemented. The only thing left to work on is improvement.
+## Project Status
+
+**(Almost)** Production-ready MVP. Still requires a couple of tweaks and a modernized front-end layout before I can truly consider it ready for production. Core security and ownership semantics are hardened. Ongoing improvements including XSS sanitization for rich content, enhanced server-side validation, dynamic metadata, and SEO optimization are in the works!
