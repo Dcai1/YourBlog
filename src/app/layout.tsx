@@ -16,14 +16,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Your Blog",
-    default: `Your Blog`,
+    default: "Your Blog",
   },
   description:
     "A simple and quick blogging website that allows anybody to create a post.",
-  metadataBase: new URL(`http://localhost:3000`),
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
 };
 
 export default function RootLayout({
