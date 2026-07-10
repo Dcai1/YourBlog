@@ -1,6 +1,7 @@
 import { prisma } from "@/app/lib/prisma_client";
 import { notFound } from "next/navigation";
 import { GetUser } from "@/app/lib/auth";
+import type { Metadata } from "next";
 // @ts-expect-error - sanitize-html has no bundled types in this project
 import sanitizeHtml from "sanitize-html";
 
@@ -17,6 +18,36 @@ interface SanitizeOptions {
 // publish added to the page props
 interface BlogPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const post = await prisma.blogPost.findUnique({
+    where: { id },
+    select: {
+      title: true,
+      excerpt: true,
+    },
+  });
+
+  if (!post) {
+    return {
+      title: "Post not found",
+      description: "The requested blog post could not be found.",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt || "Read this post on YourBlog.",
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || undefined,
+      type: "article",
+    },
+  };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {

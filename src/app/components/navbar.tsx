@@ -11,7 +11,7 @@ export const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
-  const { user, fetchUser } = useAuth();
+  const { user, fetchUser, userloading } = useAuth();
 
   async function handleLogout() {
     const res = await fetch("/api/logout", { method: "POST" });
@@ -73,7 +73,7 @@ export const Navbar = () => {
               </Link>
             </li>
 
-            {user && (
+            {!userloading && user && (
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
@@ -102,15 +102,15 @@ export const Navbar = () => {
 
           <div className="d-flex gap-3 align-items-center justify-content-center">
             <Hello />
-            {user ? (
-              <>
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </>
+            {userloading ? (
+              <span className="text-muted small">Checking session…</span>
+            ) : user ? (
+              <button
+                className="btn btn-outline-primary"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             ) : (
               <>
                 <BlogButton href="/login" text="Login" />
