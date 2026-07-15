@@ -18,7 +18,7 @@ export function HomeJourney() {
   return (
     <main className="home-journey">
       {/* Info Section 2 */}
-      <section className="home-stage home-stage--launch">
+      <section className="home-stage home-stage--launch min-h-screen">
         <div className="launch-card">
           <span className="home-kicker">Final approach</span>
           <h2 className="display-5 fw-bold mb-3">Call to Action Placeholder</h2>
@@ -63,7 +63,7 @@ export function HomeJourney() {
       </section>
 
       {/* Rising Section */}
-      <section className="home-stage home-stage--speed">
+      <section className="home-stage home-stage--speed min-h-screen">
         <div className="speed-lines" aria-hidden="true" />
         <div className="home-stage__content">
           <span className="home-kicker">Transit</span>
