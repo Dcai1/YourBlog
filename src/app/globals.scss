@@ -376,6 +376,27 @@ footer {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.glass {
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stripe-pattern {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    #111c3e,
+    #111c3e 15px,
+    #0a1025 20px,
+    #0a1025 50px
+  );
+}
+
 .glass-card,
 .launch-card {
   border: 1px solid rgba(143, 220, 255, 0.24);
@@ -383,6 +404,7 @@ footer {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: 0 24px 60px rgba(1, 5, 18, 0.35);
+  min-height: 25vh;
 }
 
 .glass-card {
