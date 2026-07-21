@@ -94,9 +94,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
             <p className="page-subtitle mb-4 fst-italic">{post.excerpt}</p>
           )}
 
-          <p className="text-muted mb-5">
+          <p className=" mb-5">
             By{" "}
-            <span className="fw-semibold text-light">
+            <span className="fw-semibold  text-primary">
               {post.author.firstName} {post.author.lastName}
             </span>{" "}
             on {new Date(post.createdAt).toLocaleDateString()}
