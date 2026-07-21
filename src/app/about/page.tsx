@@ -19,10 +19,11 @@ export default function About() {
 
           <section className="page-panel">
             <p className="fs-5 mb-3">
-              YourBlog is a full-stack blogging platform built to feel polished,
-              secure, and easy to maintain. Readers can browse published posts,
-              while signed-in authors can create drafts, publish when ready, and
-              manage their own content from a dedicated dashboard.
+              YourBlog is a space-themed, full-stack blogging platform built to
+              feel polished, secure, and easy to maintain. Readers can browse
+              published posts, while signed-in authors can create drafts,
+              publish when ready, and manage their own content from a dedicated
+              dashboard.
             </p>
 
             <h3 className="fs-3 my-3 blog-title">
