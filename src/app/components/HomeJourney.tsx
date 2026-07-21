@@ -77,7 +77,7 @@ export function HomeJourney() {
       </section>
 
       {/* Starting Section */}
-      <section className="home-stage home-stage--intro" id="intro">
+      <section className="home-stage home-stage--intro">
         <div className="home-stage__content">
           <span className="home-kicker">YourBlog</span>
           <h1 className="display-4 fw-bold mb-4">
@@ -90,7 +90,7 @@ export function HomeJourney() {
             <BlogButton href="/register" text="Join the Mission" />
           </div>
 
-          <p className="small fw-semibold">
+          <p id="intro" className="small fw-semibold">
             A Personal and Secure Blog Application.
           </p>
         </div>
