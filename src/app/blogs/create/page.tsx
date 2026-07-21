@@ -79,89 +79,92 @@ export default function Create() {
   };
 
   return (
-    <main className="container py-5 min-h-screen">
-      <div className="mx-auto box-primary p-5 rounded-4 shadow-sm">
-        <h1 className="text-center mb-4 blog-title">Create a New Post</h1>
+    <main className="page-shell min-h-screen">
+      <div className="page-frame">
+        <div className="page-panel mx-auto">
+          <span className="home-kicker">Launch window</span>
+          <h1 className="text-center mb-4 page-title">Create a New Post</h1>
 
-        {/* Title Input */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">Title</label>
-          <InputBar
-            type="text"
-            placeholder="Enter your blog title..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-
-        {/* Excerpt Input */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">Excerpt</label>
-          <InputBar
-            type="text"
-            placeholder="A short summary or teaser for your post..."
-            value={excerpt}
-            onChange={(e) => setExcerpt(e.target.value)}
-          />
-        </div>
-
-        {/* Content Editor */}
-        <div className="mb-4">
-          <label className="form-label fw-semibold">Content</label>
-          <div className="border rounded overflow-hidden">
-            <ReactQuill
-              theme="snow"
-              value={content}
-              onChange={setContent}
-              modules={quillModules}
-              placeholder="Start writing your post here..."
-              style={{ height: "100%", minHeight: "500px" }}
+          {/* Title Input */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Title</label>
+            <InputBar
+              type="text"
+              placeholder="Enter your blog title..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-        </div>
 
-        {/* Publish Button */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">
-            Publish Post Publicly
-          </label>
-          <label className="switch">
-            <input
-              placeholder="Will this post show publicly?"
-              type="checkbox"
-              checked={published}
-              onChange={(e) => setPublished(e.target.checked)}
+          {/* Excerpt Input */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Excerpt</label>
+            <InputBar
+              type="text"
+              placeholder="A short summary or teaser for your post..."
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
             />
-            <span className="slider"></span>
-          </label>
-          <label className="form-label fw-semibold">
-            If enabled, this post will appear on the public blog. If disabled,
-            it will stay as a draft.
-          </label>
-        </div>
-        {/* Submit */}
-        <div className="text-center">
-          {/* Message alert */}
-          {message && (
-            <div
-              className={`alert ${error ? "alert-danger" : "alert-success"}`}
-              role="alert"
-            >
-              {message}
-            </div>
-          )}
+          </div>
 
-          {/* Save Post Button */}
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="btn btn-primary px-5 py-2 fs-5"
-          >
-            {published ? "Publish Post" : "Save Draft"}
-          </button>
-          {loading && (
-            <p className="text-muted text-center fw-bolder">Processing...</p>
-          )}
+          {/* Content Editor */}
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Content</label>
+            <div className="border rounded overflow-hidden">
+              <ReactQuill
+                theme="snow"
+                value={content}
+                onChange={setContent}
+                modules={quillModules}
+                placeholder="Start writing your post here..."
+                style={{ height: "100%", minHeight: "500px" }}
+              />
+            </div>
+          </div>
+
+          {/* Publish Button */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">
+              Publish Post Publicly
+            </label>
+            <label className="switch">
+              <input
+                placeholder="Will this post show publicly?"
+                type="checkbox"
+                checked={published}
+                onChange={(e) => setPublished(e.target.checked)}
+              />
+              <span className="slider"></span>
+            </label>
+            <label className="form-label fw-semibold">
+              If enabled, this post will appear on the public blog. If disabled,
+              it will stay as a draft.
+            </label>
+          </div>
+          {/* Submit */}
+          <div className="text-center">
+            {/* Message alert */}
+            {message && (
+              <div
+                className={`alert ${error ? "alert-danger" : "alert-success"}`}
+                role="alert"
+              >
+                {message}
+              </div>
+            )}
+
+            {/* Save Post Button */}
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-primary px-5 py-2 fs-5 rounded-pill"
+            >
+              {published ? "Publish Post" : "Save Draft"}
+            </button>
+            {loading && (
+              <p className="text-muted text-center fw-bolder">Processing...</p>
+            )}
+          </div>
         </div>
       </div>
     </main>

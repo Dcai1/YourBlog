@@ -38,28 +38,28 @@ export default function Blog() {
   }, []);
 
   return (
-    <main className="container min-h-screen py-4">
-      <div className="mb-4 text-center">
-        <h1 className="blog-title">Blogs</h1>
-        <p className="text-muted mb-0">
-          Browse published posts from the blog. Unpublished posts remain visible
-          only to their authors.
-        </p>
-      </div>
-
-      {/* Show button to create a post on login */}
-      {user && (
-        <div className="mb-4 text-center">
-          {" "}
-          <Link className="btn btn-primary" href="/blogs/create">
-            Create a Post
-          </Link>
+    <main className="page-shell min-h-screen">
+      <div className="page-frame">
+        <div className="page-hero mb-4 text-center">
+          <span className="home-kicker">Public feed</span>
+          <h1 className="page-title">Blogs</h1>
+          <p className="page-subtitle mt-3 mb-0">
+            Browse published posts from the blog. Unpublished posts remain
+            visible only to their authors.
+          </p>
         </div>
-      )}
 
-      {/* Display blog posts from database */}
-      <div className="d-flex align-items-center justify-content-center">
-        <section className="d-flex my-auto row g-4 blog-box">
+        {/* Show button to create a post on login */}
+        {user && (
+          <div className="mb-4 text-center">
+            <Link className="btn btn-primary rounded-pill" href="/blogs/create">
+              Create a Post
+            </Link>
+          </div>
+        )}
+
+        {/* Display blog posts from database */}
+        <section className="page-panel row g-4 align-items-stretch">
           {loading && (
             <div className="text-center">
               <p className="fw-bold fs-5 text-primary">Loading!</p>
@@ -71,7 +71,7 @@ export default function Blog() {
 
           {posts.map((post) => (
             <div key={post.id} className="col-12 col-sm-6 col-md-4">
-              <div className="border shadow-sm card card-blog">
+              <div className="border shadow-sm card card-blog h-100">
                 <div className="card-body d-flex flex-column">
                   <h3 className="mb-2 card-title fw-bold">{post.title}</h3>
                   <p className="card-text text-muted grow fw-bolder">

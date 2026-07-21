@@ -85,22 +85,18 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const safeHtml = sanitizeHtml(post.content ?? "", sanitizeOptions);
 
   return (
-    <main className="container my-5 d-flex align-items-center justify-content-center">
-      <div className="card shadow-sm border-0 blog-box">
-        <div className="card-body p-5">
-          <h1 className="card-title display-4 fw-bold mb-4 text-dark">
-            {post.title}
-          </h1>
+    <main className="page-shell min-h-screen">
+      <div className="page-frame">
+        <div className="page-panel">
+          <h1 className="page-title mb-4">{post.title}</h1>
 
           {post.excerpt && (
-            <p className="card-subtitle mb-4 fs-5 text-muted fst-italic">
-              {post.excerpt}
-            </p>
+            <p className="page-subtitle mb-4 fst-italic">{post.excerpt}</p>
           )}
 
           <p className="text-muted mb-5">
             By{" "}
-            <span className="fw-semibold">
+            <span className="fw-semibold text-light">
               {post.author.firstName} {post.author.lastName}
             </span>{" "}
             on {new Date(post.createdAt).toLocaleDateString()}
