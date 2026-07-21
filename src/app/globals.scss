@@ -86,6 +86,80 @@ footer {
 
 /* Custom Backgrounds */
 
+.page-shell {
+  position: relative;
+  padding: 2rem 0 4rem;
+}
+
+.page-frame {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.page-panel,
+.page-hero,
+.page-rail {
+  border: 1px solid rgba(143, 220, 255, 0.18);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 18, 42, 0.88),
+    rgba(4, 10, 24, 0.78)
+  );
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 60px rgba(1, 5, 18, 0.35);
+}
+
+.page-panel {
+  padding: 1.5rem;
+  border-radius: 1.4rem;
+}
+
+.page-hero {
+  padding: 1.25rem 1.4rem;
+  border-radius: 1.2rem;
+}
+
+.page-rail {
+  padding: 1.4rem;
+  border-radius: 1.4rem;
+}
+
+.page-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.page-grid--about {
+  grid-template-columns: 0.95fr 1.45fr;
+}
+
+.page-grid--stack {
+  grid-template-columns: 1fr;
+}
+
+.glass-input {
+  background: rgba(7, 13, 35, 0.66);
+  border: 1px solid rgba(79, 209, 255, 0.24);
+  color: var(--foreground);
+  border-radius: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-input::placeholder {
+  color: rgba(244, 247, 255, 0.62);
+}
+
+.glass-input:focus {
+  background: rgba(8, 15, 35, 0.92);
+  border-color: rgba(143, 220, 255, 0.58);
+  color: var(--foreground);
+  box-shadow:
+    0 0 0 0.2rem rgba(79, 209, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
 .bg-dark {
   background: linear-gradient(90deg, #050816, #111c3e);
   background-size: cover;
@@ -147,10 +221,14 @@ footer {
 }
 
 .box-primary {
-  background-color: rgb(22, 186, 197, 0.6);
-  border: 2px solid #16bac5;
-  border-radius: 1em;
-  filter: drop-shadow(3px 3px 5px #16b9c5b7);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 18, 42, 0.88),
+    rgba(4, 10, 24, 0.78)
+  );
+  border: 1px solid rgba(143, 220, 255, 0.18);
+  border-radius: 1.4rem;
+  box-shadow: 0 24px 60px rgba(1, 5, 18, 0.35);
   padding: 2rem;
 }
 
@@ -161,7 +239,7 @@ footer {
 }
 
 .blog-box {
-  width: 80vw;
+  width: min(100%, 1000px);
   min-height: 60vh;
   background: linear-gradient(
     135deg,
@@ -280,6 +358,24 @@ footer {
 }
 
 /* Home Journey */
+.page-title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.page-subtitle {
+  color: rgba(244, 247, 255, 0.8);
+  margin: 0;
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .navbar .nav-link {
   color: rgba(244, 247, 255, 0.92);
   transition:
@@ -502,6 +598,12 @@ circle {
   }
 }
 
+@media (max-width: 991px) {
+  .page-grid--about {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 767px) {
   .home-grid {
     grid-template-columns: 1fr;
@@ -509,6 +611,16 @@ circle {
 
   .home-stage {
     padding: 4rem 1rem;
+  }
+
+  .page-shell {
+    padding: 1rem 0 2.5rem;
+  }
+
+  .page-panel,
+  .page-hero,
+  .page-rail {
+    padding: 1rem;
   }
 }
 

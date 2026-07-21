@@ -48,7 +48,7 @@ export function HomeJourney() {
         <div className="home-stage__content home-grid">
           <article className="glass-card">
             <h3>Write freely</h3>
-            <p>Write comfortly with a rich text editor provided by Quill</p>
+            <p>Write comfortly with a rich text editor provided by Quill.</p>
           </article>
           <article className="glass-card">
             <h3>Publish with safety</h3>
