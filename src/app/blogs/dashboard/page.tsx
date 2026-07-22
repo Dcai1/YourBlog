@@ -68,12 +68,15 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="container py-5">
-      <h1 className="mb-4 blog-title">Your Dashboard</h1>
+    <main className="page-shell min-h-screen">
+      <div className="page-frame">
+        <div className="page-hero mb-4">
+          <span className="home-kicker">Control Board</span>
+          <h1 className="page-title">Your Dashboard</h1>
+        </div>
 
-      <div className="blog-container">
-        <section className="blog-box">
-          <h2 className="mb-3 fw-bold text-secondary">Your Blog Posts</h2>
+        <section className="page-panel">
+          <h2 className="mb-3 fw-bold text-light">Your Blog Posts</h2>
 
           {loading ? (
             <div className="text-center">

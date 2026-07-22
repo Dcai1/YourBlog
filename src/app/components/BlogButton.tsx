@@ -10,7 +10,7 @@ type BlogProps = {
 export const BlogButton = ({ href, text, size, gradient }: BlogProps) => {
   return (
     <Link
-      className={`btn btn-outline-primary ${size ? size : "fs-6"} ${
+      className={`btn btn-outline-primary rounded-pill ${size ? size : "fs-6"} ${
         gradient ? gradient : ""
       } `}
       href={href}

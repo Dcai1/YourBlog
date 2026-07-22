@@ -41,57 +41,62 @@ export default function Login() {
     } catch {
       setError(true);
       setMessage("An unexpected error occurred, please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <main className="container mt-5 d-flex justify-content-center align-items-center page-section">
-      <div className="col-10 col-sm-8 col-md-6 col-lg-5 p-4 rounded shadow bg-primary">
-        <div className="d-flex flex-column">
-          <h1 className="text-center mb-4 blog-title"> Login </h1>
+    <main className="page-shell d-flex justify-content-center align-items-center min-h-screen">
+      <div className="page-frame d-flex justify-content-center">
+        <div className="page-panel col-12 col-sm-8 col-md-6 col-lg-5">
+          <div className="d-flex flex-column">
+            <span className="home-kicker align-self-center">Secure access</span>
+            <h1 className="text-center mb-4 page-title">Login</h1>
 
-          {/* Message alert */}
-          {message && (
-            <div
-              className={`alert ${error ? "alert-danger" : "alert-success"}`}
-              role="alert"
+            {/* Message alert */}
+            {message && (
+              <div
+                className={`alert ${error ? "alert-danger" : "alert-success"}`}
+                role="alert"
+              >
+                {message}
+              </div>
+            )}
+
+            <InputBar
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+
+            <InputBar
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
+
+          {/* Submit */}
+          <form onSubmit={handleSubmit}>
+            <button
+              type="submit"
+              name="submit"
+              className="d-flex btn btn-outline-primary mx-auto mt-4 fs-5 rounded-pill"
             >
-              {message}
-            </div>
-          )}
-
-          <InputBar
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-
-          <InputBar
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+              Login
+            </button>
+            {loading && (
+              <p className="text-center text-muted fw-bolder">Processing...</p>
+            )}
+          </form>
         </div>
-
-        {/* Submit */}
-        <form onSubmit={handleSubmit}>
-          <button
-            type="submit"
-            name="submit"
-            className="d-flex btn btn-outline-primary mx-auto mt-4 fs-5"
-          >
-            Login
-          </button>
-          {loading && (
-            <p className="text-center text-muted fw-bolder">Processing...</p>
-          )}
-        </form>
       </div>
     </main>
   );

@@ -88,71 +88,76 @@ export default function Register() {
   };
 
   return (
-    <main className="container mt-5 d-flex justify-content-center align-items-center page-section">
-      <div className="col-10 col-sm-8 col-md-6 col-lg-5 p-4 rounded shadow bg-primary">
-        <div className="d-flex flex-column">
-          <h1 className="text-center mb-4 blog-title"> Register </h1>
+    <main className="page-shell d-flex justify-content-center align-items-center min-h-screen">
+      <div className="page-frame d-flex justify-content-center">
+        <div className="page-panel col-12 col-sm-8 col-md-6 col-lg-5">
+          <div className="d-flex flex-column">
+            <span className="home-kicker align-self-center">
+              Create account
+            </span>
+            <h1 className="text-center mb-4 page-title">Register</h1>
 
-          {/* Message alert */}
-          {message && (
-            <div
-              className={`alert ${error ? "alert-danger" : "alert-success"}`}
-              role="alert"
+            {/* Message alert */}
+            {message && (
+              <div
+                className={`alert ${error ? "alert-danger" : "alert-success"}`}
+                role="alert"
+              >
+                {message}
+              </div>
+            )}
+
+            <InputBar
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                validateEmail(e.target.value);
+              }}
+            />
+            {emailError && <small className="text-danger">{emailError}</small>}
+
+            <InputBar
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+
+            <InputBar
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+
+            <InputBar
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword(e.target.value);
+              }}
+            />
+            {passwordError && (
+              <small className="text-danger">{passwordError}</small>
+            )}
+          </div>
+
+          {/* Submit */}
+          <form onSubmit={handleSubmit}>
+            <button
+              type="submit"
+              name="submit"
+              id=""
+              className="d-flex btn btn-outline-primary mx-auto mt-4 rounded-pill"
             >
-              {message}
-            </div>
-          )}
-
-          <InputBar
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              validateEmail(e.target.value);
-            }}
-          />
-          {emailError && <small className="text-danger">{emailError}</small>}
-
-          <InputBar
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-
-          <InputBar
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-
-          <InputBar
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              validatePassword(e.target.value);
-            }}
-          />
-          {passwordError && (
-            <small className="text-danger">{passwordError}</small>
-          )}
+              Register
+            </button>
+          </form>
         </div>
-
-        {/* Submit */}
-        <form onSubmit={handleSubmit}>
-          <button
-            type="submit"
-            name="submit"
-            id=""
-            className="d-flex btn btn-outline-primary mx-auto mt-4"
-          >
-            Register
-          </button>
-        </form>
       </div>
     </main>
   );

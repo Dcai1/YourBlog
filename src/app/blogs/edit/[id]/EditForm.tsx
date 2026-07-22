@@ -92,92 +92,97 @@ export default function EditForm({ post }: { post: BlogParams }) {
     ],
   };
   return (
-    <main className="container py-5 bg-light min-vh-100">
-      <div className="mx-auto bg-white p-5 rounded-4 shadow-sm">
-        <Link href="/blogs/dashboard" className="btn btn-primary fw-bold mb-5">
-          ← Back
-        </Link>
-        <h1 className="text-center mb-4 fw-bold text-dark">Edit Your Post</h1>
+    <main className="page-shell min-h-screen">
+      <div className="page-frame">
+        <div className="page-panel">
+          <Link
+            href="/blogs/dashboard"
+            className="btn btn-primary fw-bold mb-5 rounded-pill"
+          >
+            ← Back
+          </Link>
+          <h1 className="text-center mb-4 page-title">Edit Your Post</h1>
 
-        {/* Title Input */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">Title</label>
-          <InputBar
-            type="text"
-            placeholder="Enter your blog title..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-
-        {/* Excerpt Input */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">Excerpt</label>
-          <InputBar
-            type="text"
-            placeholder="A short summary or teaser for your post..."
-            value={excerpt}
-            onChange={(e) => setExcerpt(e.target.value)}
-          />
-        </div>
-
-        {/* Content Editor */}
-        <div className="mb-4">
-          <label className="form-label fw-semibold">Content</label>
-          <div className="border rounded overflow-hidden">
-            <ReactQuill
-              theme="snow"
-              value={content}
-              onChange={setContent}
-              modules={quillModules}
-              placeholder="Start writing your post here..."
-              style={{ height: "100%", minHeight: "500px" }}
+          {/* Title Input */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Title</label>
+            <InputBar
+              type="text"
+              placeholder="Enter your blog title..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-        </div>
 
-        {/* Publish Button */}
-        <div className="mb-3">
-          <label className="form-label fw-semibold">
-            Publish Post Publicly
-          </label>
-          <label className="switch">
-            <input
-              placeholder="Will this post show publicly?"
-              type="checkbox"
-              checked={published}
-              onChange={(e) => setPublished(e.target.checked)}
+          {/* Excerpt Input */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Excerpt</label>
+            <InputBar
+              type="text"
+              placeholder="A short summary or teaser for your post..."
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
             />
-            <span className="slider"></span>
-          </label>
-          <label className="form-label fw-semibold">
-            If enabled, this post will appear on the public blog. If disabled,
-            it will stay as a draft.
-          </label>
-        </div>
+          </div>
 
-        {/* Submit */}
-        <div className="text-center">
-          {/* Message alert */}
-          {message && (
-            <div
-              className={`alert ${error ? "alert-danger" : "alert-success"}`}
-              role="alert"
-            >
-              {message}
+          {/* Content Editor */}
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Content</label>
+            <div className="border rounded overflow-hidden">
+              <ReactQuill
+                theme="snow"
+                value={content}
+                onChange={setContent}
+                modules={quillModules}
+                placeholder="Start writing your post here..."
+                style={{ height: "100%", minHeight: "500px" }}
+              />
             </div>
-          )}
+          </div>
 
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="btn btn-primary px-5 py-2 fs-5"
-          >
-            {published ? "Publish Post" : "Save Draft"}
-          </button>
-          {loading && (
-            <p className="text-muted text-center fw-bolder">Processing...</p>
-          )}
+          {/* Publish Button */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">
+              Publish Post Publicly
+            </label>
+            <label className="switch">
+              <input
+                placeholder="Will this post show publicly?"
+                type="checkbox"
+                checked={published}
+                onChange={(e) => setPublished(e.target.checked)}
+              />
+              <span className="slider"></span>
+            </label>
+            <label className="form-label fw-semibold">
+              If enabled, this post will appear on the public blog. If disabled,
+              it will stay as a draft.
+            </label>
+          </div>
+
+          {/* Submit */}
+          <div className="text-center">
+            {/* Message alert */}
+            {message && (
+              <div
+                className={`alert ${error ? "alert-danger" : "alert-success"}`}
+                role="alert"
+              >
+                {message}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-primary px-5 py-2 fs-5 rounded-pill"
+            >
+              {published ? "Publish Post" : "Save Draft"}
+            </button>
+            {loading && (
+              <p className="text-muted text-center fw-bolder">Processing...</p>
+            )}
+          </div>
         </div>
       </div>
     </main>

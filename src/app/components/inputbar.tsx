@@ -13,7 +13,7 @@ export const InputBar = ({
 }: InputProps) => {
   return (
     <input
-      className="form-control my-2 shadow"
+      className="form-control my-2 glass-input"
       type={type}
       value={value}
       placeholder={placeholder}

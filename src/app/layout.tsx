@@ -22,8 +22,8 @@ const siteUrl =
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Your Blog",
-    default: "Your Blog",
+    template: "%s | YourBlog",
+    default: "YourBlog",
   },
   description:
     "A simple and quick blogging website that allows anybody to create a post.",
