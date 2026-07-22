@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://your-blog-jet.vercel.app/sitemap.xml
+
+# Block non-public and crawler-unfriendly routes
+Disallow: /api/
+Disallow: /blogs/create
+Disallow: /blogs/dashboard
+Disallow: /blogs/edit/
+Disallow: /login
+Disallow: /register
