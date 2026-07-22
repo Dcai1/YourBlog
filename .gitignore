@@ -44,3 +44,7 @@ next-env.d.ts
 
 # TODO list
 /TODO.md
+
+#.vscode
+/.vscode
+
