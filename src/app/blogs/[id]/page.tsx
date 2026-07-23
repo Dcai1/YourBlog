@@ -4,6 +4,7 @@ import { GetUser } from "@/app/lib/auth";
 import type { Metadata } from "next";
 // @ts-expect-error - sanitize-html has no bundled types in this project
 import sanitizeHtml from "sanitize-html";
+import LikeButton from "./LikeButton";
 
 interface SanitizeOptions {
   allowedTags: string[];
@@ -56,7 +57,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
   // grab blog post by id
   const post = await prisma.blogPost.findUnique({
     where: { id },
-    include: { author: true },
+    include: {
+      author: true,
+      _count: { select: { likes: true } },
+    },
   });
 
   // redirect to a 404 if the post doesn’t exist
@@ -64,12 +68,22 @@ export default async function BlogPage({ params }: BlogPageProps) {
     notFound();
   }
 
+  const user = await GetUser();
+
   // redirect to a 404 if the post is not published, or the user accessing this is not the author
   if (!post.published) {
-    const user = await GetUser();
     if (!user || user.id !== post.authorId) {
       notFound();
     }
+  }
+
+  // Check if the current user has liked this post
+  let isLikedByUser = false;
+  if (user) {
+    const existingLike = await prisma.like.findUnique({
+      where: { userId_postId: { userId: user.id, postId: id } },
+    });
+    isLikedByUser = !!existingLike;
   }
 
   // sanitize content one more time for safety measures
@@ -109,6 +123,16 @@ export default async function BlogPage({ params }: BlogPageProps) {
             className="card-text fs-5 lh-lg"
             dangerouslySetInnerHTML={{ __html: safeHtml }}
           />
+
+          <hr className="my-4" />
+
+          <div className="d-flex justify-content-start">
+            <LikeButton
+              postId={post.id}
+              initialLiked={isLikedByUser}
+              initialCount={post._count.likes}
+            />
+          </div>
         </div>
       </div>
     </main>
