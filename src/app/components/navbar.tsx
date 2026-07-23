@@ -53,7 +53,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  pathName === "/" && "active text-black"
+                  pathName === "/" && "active text-primary"
                 }`}
                 href="/"
                 aria-current="page"
@@ -65,7 +65,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  pathName === "/blogs" && "active text-black"
+                  pathName === "/blogs" && "active text-primary"
                 }`}
                 href="/blogs"
               >
@@ -77,7 +77,7 @@ export const Navbar = () => {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    pathName === "/blogs/dashboard" && "active text-black"
+                    pathName === "/blogs/dashboard" && "active text-primary"
                   }`}
                   href="/blogs/dashboard"
                 >
@@ -89,7 +89,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  pathName === "/about" && "active text-black"
+                  pathName === "/about" && "active text-primary"
                 }`}
                 href="/about"
               >
@@ -103,7 +103,7 @@ export const Navbar = () => {
           <div className="d-flex gap-3 align-items-center justify-content-center">
             <Hello />
             {userloading ? (
-              <span className="text-muted small">Checking session…</span>
+              <span className=" small">Checking session…</span>
             ) : user ? (
               <button
                 className="btn btn-outline-primary"
