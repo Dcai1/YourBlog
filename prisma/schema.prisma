@@ -24,6 +24,7 @@ model User {
   // Relation to BlogPost
   blogPosts BlogPost[]
   Sessions  Session[]
+  likes     Like[]
 
   @@index([id])
 }
@@ -44,6 +45,8 @@ model BlogPost {
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
 
+  likes Like[]
+
   @@index([authorId])
 }
 
@@ -53,4 +56,18 @@ model Session {
   userId    String
   createdAt DateTime @default(now())
   expiresAt DateTime
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+
+  user User     @relation(fields: [userId], references: [id])
+  post BlogPost @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+  @@index([postId])
+  @@index([userId])
 }

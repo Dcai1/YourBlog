@@ -8,7 +8,7 @@ export const Hello = () => {
   return (
     <div className="d-flex">
       {user && (
-        <p className="text-center my-auto text-secondary fw-bold fs-6">
+        <p className="text-center my-auto text-primary fw-bolder fs-6">
           Hello, {user.firstName}!
         </p>
       )}
