@@ -81,16 +81,20 @@ export function HomeJourney() {
         <div className="home-stage__content">
           <span className="home-kicker">YourBlog</span>
           <h1 className="display-4 fw-bold mb-4">
-            Stories that feel like they are arriving from beyond the horizon.
+            Stories that feel like they are arriving from beyond the event
+            horizon.
           </h1>
           <p className="lead mb-4">Scroll up to begin the journey</p>
 
-          <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
+          <div
+            id="intro"
+            className="d-flex flex-wrap justify-content-center gap-3 mb-4 "
+          >
             <BlogButton href="/blogs" text="Explore Existing Posts" />
             <BlogButton href="/register" text="Join the Mission" />
           </div>
 
-          <p id="intro" className="small fw-semibold">
+          <p className="small fw-semibold">
             A Personal and Secure Blog Application.
           </p>
         </div>
