@@ -151,6 +151,7 @@ export function HomeJourney() {
     };
   }, []);
 
+  // ----------------------------- MAIN ------------------------------------
   return (
     <main className="home-journey">
       {/* Info Section 2 */}
@@ -217,7 +218,9 @@ export function HomeJourney() {
         <div className="speed-lines" aria-hidden="true" />
         <div className="home-stage__content">
           <span className="home-kicker">Transit</span>
-          <h2 className="display-6 fw-bold mb-3">Momentum building</h2>
+          <h2 className="display-6 fw-bold mb-3">
+            Momentum Building (yeah, this will look better soon)
+          </h2>
           <p className="lead mx-auto" style={{ maxWidth: "760px" }}>
             Takeoff!
           </p>
@@ -232,7 +235,7 @@ export function HomeJourney() {
             Stories that feel like they are arriving from beyond the event
             horizon.
           </h1>
-          <p className="lead mb-4">Scroll up to begin the journey</p>
+          <p className="lead mb-4">Scroll up to begin the journey.</p>
 
           <div className="d-flex flex-wrap justify-content-center gap-3 mb-4 ">
             <BlogButton href="/blogs" text="Explore Existing Posts" />
